@@ -1,6 +1,7 @@
 ﻿namespace REST_API_Example.Models
 {
-    public class Enterprice
+    public class Enterprise
     {
+
     }
 }

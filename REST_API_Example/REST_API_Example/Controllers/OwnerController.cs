@@ -5,7 +5,7 @@ namespace REST_API_Example.Controllers
 {
     public class OwnerController : Controller
     {
-        [Route("/listorders")]
+        [Route("/orders-list")]
         public IActionResult ListOfOrders()
         {
             List<Order> orders = new List<Order>();
@@ -14,8 +14,5 @@ namespace REST_API_Example.Controllers
 
             return View(orders);
         }
-
-        [HttpPut]
-
     }
 }
