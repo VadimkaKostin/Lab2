@@ -40,7 +40,7 @@ namespace REST_API_Example.Controllers
 
         [Route("/products")]
         [HttpPut]
-        public IActionResult UpdateProduct([FromBody] Product product)
+        public IActionResult Update([FromBody] Product product)
         {
             List<Product> orders = new List<Product>();
 
@@ -51,7 +51,7 @@ namespace REST_API_Example.Controllers
 
         [Route("/products")]
         [HttpPost]
-        public IActionResult CreateProduct([FromBody] Product product)
+        public IActionResult Create([FromBody] Product product)
         {
             //додаємо об'єкт в бд
 
@@ -60,9 +60,18 @@ namespace REST_API_Example.Controllers
 
         [Route("/products/{id}")]
         [HttpDelete]
-        public IActionResult DeleteProduct([FromBody] Product product)
+        public IActionResult Delete([FromRoute] int id)
         {
             //видаляємо об'єкт в бд
+
+            return RedirectToAction(nameof(ProductsByEnterprise), new int());
+        }
+
+        [Route("/products")]
+        [HttpDelete]
+        public IActionResult DeleteAll()
+        {
+            //видаляємо всі об'єкти в бд
 
             return RedirectToAction(nameof(ProductsByEnterprise), new int());
         }
