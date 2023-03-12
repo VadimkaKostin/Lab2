@@ -7,45 +7,54 @@ namespace REST_API_Example.Controllers
 {
     public class CustomerController : Controller
     {
-        [Route("/enterprises")]
+        [Route("/customers")]
         [HttpGet]
-        public IActionResult Enterprises()
+        public IActionResult Customers()
         {
-            List<Enterprise> enterprises = new List<Enterprise>();
+            List<Customer> customers = new List<Customer>();
 
-            //Load all enterprises from DB
+            //Read all customers from DB
 
-            return View(enterprises);
+            return View(customers);
         }
 
-        [Route("/enterprises/{enterpriseId}/products")]
+        [Route("/customers/{id}")]
         [HttpGet]
-        public IActionResult Products([FromRoute] int enterpriseId)
+        public IActionResult CustomerById([FromRoute] int id)
         {
-            List<Product> products = new List<Product>();
+            //Read customer with entered id from DB
 
-            //Load all products from enterprise with entered id from DB
-
-            return View(products);
+            return View(customer);
         }
 
-        [Route("/orders")]
+        [Route("/customers")]
         [HttpPost]
-        public IActionResult AddOrder([FromBody] Order? order)
+        public IActionResult CreateCustomer([FromBody] Customer? customer)
         {
-            //Create new order and add it to DB
-            return View();
+            //Add new customer to DB
+
+            return RedirectToAction(nameof(CustomerById), new int());
         }
 
-        [Route("/orders/{orderId}")]
+        [Route("/customers")]
+        [HttpPut]
+        public IActionResult UpdateCustomer([FromBody] Customer? customer)
+        {
+            //Update customer in DB
+
+            return RedirectToAction(nameof(CustomerById), new int());
+        }
+
+        [Route("/customers/{customerId}/products")]
         [HttpPost]
-        public IActionResult AddProductToOrder([FromRoute] int orderId, [FromBody] Product? product)
+        public IActionResult AddProductToOrder([FromRoute] int customerId, [FromBody] Product? product)
         {
-            //Add product to DB and bind it to order with entered Id
-            return View();
+            //Add product to order of customer with entered id to DB
+
+            return RedirectToAction(nameof(CustomerById), new int ());
         }
 
-        [Route("/users/{customerId}/card")]
+        [Route("/customers/{customerId}/card")]
         [HttpGet]
         public IActionResult Card([FromRoute] int customerId)
         {
@@ -53,6 +62,24 @@ namespace REST_API_Example.Controllers
 
             //Load all products from last order with entered customer id
             return View(products);
+        }
+
+        [Route("/customers")]
+        [HttpDelete]
+        public IActionResult DeleteCustomers()
+        {
+            //Delete all customers from DB
+
+            return RedirectToAction(nameof(CustomerById), new int());
+        }
+
+        [Route("/customers/{id}")]
+        [HttpDelete]
+        public IActionResult DeleteCustomer([FromRoute] int id)
+        {
+            //Delete customer with entered id from DB
+
+            return RedirectToAction(nameof(CustomerById), new int());
         }
     }
 }
