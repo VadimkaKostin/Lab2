@@ -5,31 +5,26 @@ namespace REST_API_Example.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult List()//Gets some filters
-        {
-            return View(new List<Product>()); // get all filtered products 
-        }
-
-        [Route("/create-product")]
+        [Route("/enterprises/{enterpriseId}/products")]
         [HttpGet]
-        public IActionResult CreateProduct(int id)
+        public IActionResult ProductsByEnterprise([FromRoute] int enterpriseId)
         {
-            List<Order> orders = new List<Order>();
+            List<Product> products = new List<Product>();
 
-            //Шукаємо об'єкт по заданому id
+            //Load all products from enterprise with entered id from DB
 
-            return View(orders);
+            return View(products);
         }
 
-        [Route("/create-product")]
-        [HttpPut]
-        public IActionResult CreateProduct(int id)
+        [Route("/products")]
+        [HttpGet]
+        public IActionResult AllProducts()
         {
-            List<Order> orders = new List<Order>();
+            List<Product> products = new List<Product>();
 
-            //Шукаємо об'єкт по заданому id
+            //Read all products from DB
 
-            return View(orders);
+            return View(products);
         }
     }
 }
