@@ -7,13 +7,60 @@ namespace REST_API_Example.Controllers
     {
         [Route("/orders")]
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Orders()
         {
-            List<Order> orders = new List<Order>();
+            var orders = new List<Order>();
 
-            //Load all orders from DB
+            //Get orders from db
 
-            return View(orders); 
+            return View(orders);
+        }
+
+        [Route("/orders/{id}")]
+        [HttpGet]
+        public IActionResult Order([FromRoute] int id)
+        {
+            Order orders = new Order();
+
+            //Шукаємо об'єкт по заданому id
+
+            return View(orders);
+        }
+
+        [Route("/orders")]
+        [HttpPut]
+        public IActionResult Update([FromBody] Order order)
+        {
+            //Оновлюємо замовлення
+
+            return RedirectToAction(nameof(Orders));
+        }
+
+        [Route("/orders")]
+        [HttpPost]
+        public IActionResult Create([FromBody] Order order)
+        {
+            //Додаємо замовлення
+
+            return RedirectToAction(nameof(Orders));
+        }
+
+        [Route("/orders/{id}")]
+        [HttpDelete]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            //Видаляємо замовлення
+
+            return RedirectToAction(nameof(Orders));
+        }
+
+        [Route("/orders")]
+        [HttpDelete]
+        public IActionResult DeleteAll()
+        {
+            //Видаляємо всі замовлення
+
+            return RedirectToAction(nameof(Orders));
         }
     }
 }

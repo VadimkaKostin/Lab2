@@ -26,5 +26,45 @@ namespace REST_API_Example.Controllers
 
             return View(products);
         }
+
+        [Route("/products/{id}")]
+        [HttpGet]
+        public IActionResult Product([FromRoute] int id)
+        {
+            Product product = new Product();
+
+            //Шукаємо об'єкт по заданому id
+
+            return View(product);
+        }
+
+        [Route("/products")]
+        [HttpPut]
+        public IActionResult UpdateProduct([FromBody] Product product)
+        {
+            List<Product> orders = new List<Product>();
+
+            //Оновлюємо об'єкт в бд
+
+            return RedirectToAction(nameof(ProductsByEnterprise), new int());
+        }
+
+        [Route("/products")]
+        [HttpPost]
+        public IActionResult CreateProduct([FromBody] Product product)
+        {
+            //додаємо об'єкт в бд
+
+            return RedirectToAction(nameof(ProductsByEnterprise), new int());
+        }
+
+        [Route("/products/{id}")]
+        [HttpDelete]
+        public IActionResult DeleteProduct([FromBody] Product product)
+        {
+            //видаляємо об'єкт в бд
+
+            return RedirectToAction(nameof(ProductsByEnterprise), new int());
+        }
     }
 }
